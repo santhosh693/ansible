@@ -1,0 +1,103 @@
+What is YAML?
+- YAML stands for Yet Another Markup Language
+- YAML is a human-readable data serialization language. It is commonly used for configurat files , but could be used in many applications 
+  where data is being stored or transmitted.
+- It was designed to be easy to map to hig level languages.
+Note:
+1. .yml or .yaml
+2. ---
+3. key:values
+4. space notation
+
+_________________________________________________________________________________________
+
+
+
+yaml fundamentals
+
+- What is YAML?
+  YAML is a data serialization language
+
+- What is serialization language?
+  standard format to transfer data
+
+- YAML  :  YAML AIN'T MARKUP LANGUAGE
+
+- File extension :  .yaml   (or)   .yml
+
+
+- How data structure is defined in yaml ?
+  . line separation
+  . indentation
+ 
+EX:  
+microservices:
+   - app: user-authentication
+     port:9000
+     version: 1.0
+
+----------
+Basic Syntax Of YAML
+
+
+1) Key-Value Pairs
+EX:
+ app: user-authentication
+ port:9000
+ version: 1.0
+
+
+2) Objects
+EX:
+microservice:
+   app: user-authentication
+   port:9000
+   version: 1.0
+
+
+3)Lists
+EX:
+microservices:
+   - app: user-authentication
+     port:9000
+     version: 1.0
+   - app: shooping
+     port:123
+     versions: | (or) versions: [1.0, 1.2]
+     - 1.0     |
+     - 1.2     |
+
+=> List of simple values
+microservices
+ - user-authentication
+ - shooping
+
+
+
+
+4) booleans
+EX:
+  version: 1.0 
+  deployed: off (or) on    (true or false (or) yes or no )
+
+
+_________________________________________________________________________________________________________________________________________________
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

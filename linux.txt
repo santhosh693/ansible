@@ -1,0 +1,63 @@
+1) password less authentication in linux:                                                                        (in vi :ctrl+x,ctrl+y)
+-> ubuntu: launch 2 instances for exam
+
+user1:                                                   
+$ sudo -i                                                1)172.31.62.165
+# apt-get update                                         2)172.31.49.239
+# adduser santhosh
+give password:
+
+# visudo
+= edit under: user privilege specification
+  santhosh ALL=(ALL)  NOPASSWD:ALL
+
+# vi /etc/ssh/sshd_config
+= edit under:  change to no to disable tunnelled clear tex passwords
+              passworddAuthentication yes
+# service ssh restart
+
+user2 : same
+
+user1:
+$ su santhosh  -> go to user:/home/santhosh
+$ ssh ___user2 ip___ --- (it will ask password)   
+$ exit
+
+$ ssh-keygen  -----(in user home dir only-santhosh)
+$ ls .ssh/   ------(for verification)
+$ ssh-copy-id ___give ip of u2___ 
+$ ssh ___give ip to login to u2 ____   (passeordless login)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

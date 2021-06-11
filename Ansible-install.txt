@@ -1,0 +1,162 @@
+Stage01 : Install and config ansible master server
+
+1) We have to create ec2 instance with all traffic and t2.micro
+
+2) Lets get into ec2 instance 
+   $ sudo -i 
+   # apt-get update
+
+3) Create ansible user (san) with passwd
+   # adduser san
+
+4) Make ansible user (san) as sudoer
+   #visudo
+    san ALL=(ALL)  NOPASSWD:ALL
+    ctr+x,press y,press enter
+
+5) Change to passwd authentication
+   # vi /etc/ssh/sshd_config
+     passwd authentication yes
+     :wq
+
+6) ssh service restart
+   # service ssh restart
+
+7) install ansible
+   # apt-add-repository ppa:ansible/ansible
+   # apt-get update
+   # apt-get install ansible
+   # ansible --version
+
+
+
+
+Stage02: Config ansible nodes 
+
+=> ubuntu 
+1) We have to create ec2 instance with all traffic and t2.micro
+
+2) Lets get into ec2 instance 
+   - $ sudo -i 
+   - # apt-get update
+
+3) Create ansible user (san) with passwd
+   # adduser san
+
+4) Make ansible user (san) as sudoer
+   #visudo
+    san ALL=(ALL)  NOPASSWD:ALL
+    ctr+x,press y,press enter
+
+5) Change to passwd authentication
+   # vi /etc/ssh/sshd_config
+     passwd authentication yes
+     :wq
+
+6) ssh service restart
+   # service ssh restart
+
+=>RedHat
+1) We have to create ec2 instance with all traffic and t2.micro
+
+2) Lets get into ec2 instance 
+   - $ sudo -i 
+   - # yum update
+
+3) Create ansible user (san) with passwd
+   # adduser san
+   # passwd san
+
+4) Make ansible user (san) as sudoer
+   # visudo
+    san ALL=(ALL)  NOPASSWD:ALL
+
+5) Change to passwd authentication
+   # vi /etc/ssh/sshd_config
+     passwd authentication yes
+     :wq
+
+6) ssh service restart
+   # service sshd restart
+
+
+
+Stage03 : Connect from ansible master server to ansible nodes
+- on ansible master as ansible user(san):
+ 
+1) connect from ansible master to ansible nodes without passwd and pem
+   $ ssh-keygen
+   $ ssh-copy-id<private ip of nodes>
+   $ ssh<private ipof nodes>
+
+****note: never create one new key for new nodes. just copy the same key to the new nodes 
+         (if you create new key for your new nodes. then your old nodes will be disconnect with the master ) 
+
+2)Let's try to connect from ansible
+  $ ansible -i myhosts -m ping
+
+3) Write and execute playbook
+   $ ansible-playbook -i myhosts playbookname.yml
+
+
+
+
+Note 1: How To create host file and YAML files & run in Ansible
+
+=> To run the playbooks 1st you need to create a file for host ip's
+s1 : create a file (ex:myhosts) and give your node IP'S to it (in ansible user in user home dir)
+
+>>  TO check is it working or not
+EX: $ ansible all -i myhosts -m ping
+
+s2: create a file with extension .yml (ex:sample.yml) and write your code in it and run playbook (in ansible user in user home dir)
+EX: $ ansible-playbook -i myhosts sample.yml
+
+___________________________________________________________________________________
+
+NOTE 2: Facts
+- by default it is enabled
+
+- if you want to disable it . 
+  gather_facts: no (in playbook )
+
+- how to get all info ambout nodes
+  $ ansible all -i <hostfile name> -m setup ---------------(on master)
+  $ ansible all -i <hn> -m setup -q "filter=*family*" ------(filterin the out put ex:os family)
+________________________________________________________________________________________
+
+NOTE 3: How to run the Inventorie file with multypul grops
+EX: for example you have 3 groups in host file called web,db,all
+
+- if you want to run the playbook only on the web grop then 
+$ ansible web -i <hosfile name> <playbook> 
+
+- for db group
+$ ansible db -i <hosfile name> <playbook>
+
+- for all
+$ ansible all -i <hosfile name> <playbook> 
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    

@@ -1,0 +1,23 @@
+---
+- hosts: all
+  become: yes
+  # if you want to disable it 
+  # gather_facts: no
+  tasks:
+  - name: to install webserver on ubuntu node
+    apt:
+     name: apache2
+     state: present
+    when: ansible_os_family=="Debian" #  install for only debian nodes (ubuntu)
+    # In ubuntu service will start by default so noneed to write another task 
+
+  - name: to install webserver on redhat node
+    name: httpd
+    state: present
+    when: ansible_os_family=="RedHat" #  install for only redhat nodes 
+  
+  - name: to start webserver on redhat node
+    service:
+     name: httpd
+     state: started
+    when: ansible_os_family=="RedHat" 

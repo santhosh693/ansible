@@ -1,0 +1,174 @@
+Introduction to Ansible :
+- Ansible is a simmple IT automation tool makes your applications and systems easier to deploy.
+- It supports in configuration management.
+- It uses playbooks(yaml) to create Infrastructure as code for deploy applications in various environments (dev,test,prod)
+
+________________________________________________________
+
+What ANSIBLE does:
+- Provisioning
+- Change Management
+- Automation
+- Orchestration
+- Configuration of servers
+- Application deployment
+__________________________________________________________
+
+Why Ansible:
+- It is a free open source application
+- Agent-less
+- No database
+- Highly flexible
+- It very simple and human readable
+- custom modules
+- configuration rollback in case of error
+- self documenting
+
+___________________________________________________________
+
+What are all core components of ansible
+- Ad-hoc commands
+- Playbooks
+- Module
+- Facts
+- Inventories
+- Variables
+- Configuration file
+- Templates
+- handlers
+- Roles
+- Vault
+
+__________________________________________________________________
+
+1. Ansible Ad-hoc commands
+- An Ad-hoc command is something that you might type in to do something really quick.but don't want to save for later.
+EX:
+$ ansible all -i myhost -b -m apt -a "name=tree"
+
+____________________________________________________________________
+
+2. Ansible Playbooks
+- playbook are your instruction manual.
+- Aplaybook is made up with individual plays
+- Aplay is a task
+- play book is YAML format
+
+EX:
+---
+ - hosts:all
+   become:yes
+   tasks:
+   - name: install tree
+     apt:
+     name:tree
+     state:present
+
+____________________________________________________________________
+
+3. Ansible Modules
+- Ansible with a number of modules
+- Modules are discrete units of code that can be used from the command line or in a playbook task.
+- Ansible executes each module, usually on the remote target node and collects return values.
+- Each module supports taking arguments.nearly all modules take Key=Value arguments,space delimited.
+- some modules take no arguments, and the command/shell modules simply take the string of the command you want to run.
+EX:
+yum
+Apt
+service
+Get_url
+...etc
+
+_____________________________________________________________________
+
+4.Ansible Facts
+- Ansible facts is a way of getting the information of hosts(nodes)
+- This module is automatically called by playbooks to gather useful variables about remote hosts that can be used in  playbooks.
+- It can also be executed directly by /usr/bin/ansible to check what variables are available to a hosts.
+- Ansible provides many facts about the system, automatically.
+- This module is also supported for windows targets.
+- It's not always required
+
+EX: I want to install webserver on both ubuntu & redaht by same playbook
+$ ansible all -i myhosts -m setup -a "filter=*family*"
+
+______________________________________________________________________
+
+5. Ansible Inventories
+- Ansible works against multiple nodes or "hosts" for your infrastructure at the same time.
+- By using a list or group of lists known as inventory.
+- Once your inventory is defined, you can use to select the hosts or groups you can run ansible commands.
+- Ansible uses a combination of a hosts file and a group_vars directory to pull variables per host group and run ansible plays against hosts.
+- The defalt location for Inventorie file is /etc/ansible/hosts
+- we can be called from a different hostfile by using "-i"
+- you can also use multiple inventory files at the same time.
+= Inventories are two types:
+  . static
+  . Dynamic
+
+
+Static Inventories EX:
+[webserver]
+node1 IP
+node2 IP
+
+[dbservers]
+node3 Ip
+
+[all]
+node1 IP 
+node2 IP
+node3 IP
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
