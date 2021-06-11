@@ -18,7 +18,7 @@ yaml fundamentals
 - What is YAML?
   YAML is a data serialization language
 
-- What is serialization language?
+-- What is serialization language?
   standard format to transfer data
 
 - YAML  :  YAML AIN'T MARKUP LANGUAGE
